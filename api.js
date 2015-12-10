@@ -1,7 +1,6 @@
 var net = require('net');
 var http = require('http');
 var crypto = require('crypto');
-var express = require('express');
 var expressWs = require('express-ws');
 var bodyParser = require('body-parser');
 
@@ -31,10 +30,9 @@ function checkTo(allowed, requested) {
 	return false;
 }
 
-module.exports = function (options, connectionListener) {
+module.exports = function (app, options, connectionListener) {
 	options = options || {};
 
-	var app = express();
 	var jsonParser = bodyParser.json();
 	var urlRoot = options.urlRoot || '/api/vm/net';
 

@@ -1,5 +1,5 @@
-net-browserify
-==============
+net-browserify-alt
+==================
 
 `net` module for browserify, with a websocket server proxy.
 
@@ -16,7 +16,7 @@ How to use
 
 Just require this module or map this module to the `net` module with [Browserify](https://github.com/substack/node-browserify).
 ```
-$ npm install net-browserify
+$ npm install net-browserify-alt
 ```
 
 You can set a custom proxy address if you want to:
@@ -45,12 +45,11 @@ socket.on('connect', function () {
 
 ```js
 var express = require('express');
-var netApi = require('net-browserify');
-
 // Create our app
 var app = express();
+var netApi = require('net-browserify');
 
-app.use(netApi());
+netApi(app);
 
 // Start the server
 var server = app.listen(3000, function() {
@@ -60,7 +59,7 @@ var server = app.listen(3000, function() {
 
 You can also specify some options:
 ```js
-app.use(netApi({
+netApi(app, {
 	allowOrigin: '*', // Allow access from any origin
 	to: [ // Restrict destination
 		{ host: 'example.org', port: 42 }, // Restrict to example.org:42
@@ -69,7 +68,7 @@ app.use(netApi({
 		{ host: 'bad.com', blacklist: true } // Blacklist bad.com
 		// And so on...
 	]
-}));
+});
 ```
 
 License
