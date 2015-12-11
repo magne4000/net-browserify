@@ -1,6 +1,6 @@
 {
   "name": "net-browserify-alt",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A port of the net module for the browser.",
   "author": {
     "name": "Joël Charles",
@@ -29,7 +29,6 @@
   },
   "homepage": "https://github.com/magne4000/net-browserify",
   "dependencies": {
-    "body-parser": "^1.14.1",
-    "express-ws": "^0.2.6"
+    "body-parser": "^1.14.1"
   }
 }
