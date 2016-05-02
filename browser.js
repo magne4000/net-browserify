@@ -359,7 +359,7 @@ Socket.prototype._connectWebSocket = function (token, cb) {
 Socket.prototype._handleWebsocket = function () {
 	var self = this;
 
-	this._ws.addEventListener('open', function () {
+	this._ws.onopen = function () {
 		//console.log('TCP OK');
 
 		self._connecting = false;
@@ -368,13 +368,13 @@ Socket.prototype._handleWebsocket = function () {
 		self.emit('connect');
 
 		self.read(0);
-	});
-	this._ws.addEventListener('error', function (e) {
+	};
+	this._ws.onerror = function (e) {
 		// `e` doesn't contain anything useful (https://developer.mozilla.org/en/docs/WebSockets/Writing_WebSocket_client_applications#Connection_errors)
 		console.warn('TCP error', e);
 		self.emit('error', 'An error occured with the WebSocket');
-	});
-	this._ws.addEventListener('message', function (e) {
+	};
+	this._ws.onmessage = function (e) {
 		var contents = e.data;
 
 		var gotBuffer = function (buffer) {
@@ -397,13 +397,13 @@ Socket.prototype._handleWebsocket = function () {
 		} else {
 			console.warn('Cannot read TCP stream: unsupported message type', contents);
 		}
-	});
-	this._ws.addEventListener('close', function () {
+	};
+	this._ws.onclose = function () {
 		if (self.readyState == 'open') {
 			//console.log('TCP closed');
 			self.destroy();
 		}
-	});
+	};
 };
 
 exports.isIP = function (input) {
