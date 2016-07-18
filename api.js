@@ -149,11 +149,10 @@ module.exports = function (app, options, connectionListener) {
             });
         });
         socket.on('error', function (err) {
-            res.status(502).send({
-                code: 502,
-                error: 'Socket error: '+err.code,
-                details: err
-            });
+            if (res.finished) {
+                console.log("Socket error after response closed:");
+            }
+            console.log(err);
         });
         if (connectionListener) {
             connectionListener(socket);
