@@ -204,7 +204,7 @@ Socket.prototype.destroy = function(exception) {
 		return;
 	}
 
-	self._connecting = false;
+	this._connecting = false;
 
 	this.readable = this.writable = false;
 
@@ -386,7 +386,7 @@ Socket.prototype._handleWebsocket = function () {
 		if (typeof contents == 'string') {
 			var buffer = new Buffer(contents);
 			gotBuffer(buffer);
-		} else if (window.Blob && contents instanceof Blob) {
+		} else if (window.Blob && contents instanceof window.Blob) {
 			var fileReader = new FileReader();
 			fileReader.addEventListener('load', function (e) {
 				var buf = fileReader.result;

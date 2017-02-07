@@ -159,7 +159,7 @@ module.exports = function (app, options, connectionListener) {
         }
     });
 
-    var wss = expressWs(app, server);
+    expressWs(app, server);
 
     app.ws(urlRoot + '/socket', function (ws, req) {
         var token = req.query.token;
